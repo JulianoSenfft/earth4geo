@@ -8,20 +8,46 @@ function cac_geo_meta_boxes( $meta_boxes ) {
         'title'      => 'Dados da publicação',
         'post_types' => 'publicacao',
         'fields'     => array(
+            //TEXT
             array(
-                'id'   => 'name',
-                'name' => __( 'Name', 'textdomain' ),
+                'name' => 'Titulo',
+                'id'   => 'titulo',
                 'type' => 'text',
             ),
-        ),
-    );
-    $meta_boxes[] = array(
-        'title'      => 'Dados da publicação2',
-        'post_types' => 'publicacao',
-        'fields'     => array(
+            //TEXT
             array(
-                'id'   => 'name',
-                'name' => __( 'Name', 'textdomain' ),
+                'name' => 'Imagem',
+                'id'   => 'imagem',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Conteúdo',
+                'id'   => 'conteudo',
+                'type' => 'textarea',
+            ),
+            //TEXT
+            array(
+                'name' => 'Latitude',
+                'id'   => 'latitude',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Longitude',
+                'id'   => 'longitude',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'País',
+                'id'   => 'pais',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Estado',
+                'id'   => 'estado',
                 'type' => 'text',
             ),
         ),
