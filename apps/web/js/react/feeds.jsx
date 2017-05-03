@@ -22,9 +22,7 @@ var Feed = React.createClass({
         return (
             <div>
                 {this.state.data.map(function(data, i) {
-                 
-                    let feed;
-                 
+                    
                     var titulo = data.meta_box.titulo
                     var latitude = data.meta_box.latitude
                     var longitude = data.meta_box.longitude

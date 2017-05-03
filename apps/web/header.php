@@ -6,6 +6,7 @@
         <script type="text/javascript" src="js/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="css/scripts.js"></script>
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
         
         <!-- Latest compiled and minified CSS -->

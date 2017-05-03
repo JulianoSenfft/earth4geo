@@ -1,5 +1,4 @@
 function renderMap(data){
-   console.log(data) 
 
         var map;
         var bounds = new google.maps.LatLngBounds();
@@ -45,6 +44,30 @@ function renderMap(data){
                     infoWindow.open(map, marker);
                 }
             })(marker, i));
+            
+            //evento lat long
+            google.maps.event.addListener(map, 'click', function(event) {               
+                //Get the location that the user clicked.
+                var clickedLocation = event.latLng;
+                //If the marker hasn't been added.
+                if(marker === false){
+                    //Create the marker.
+                    marker = new google.maps.Marker({
+                        position: clickedLocation,
+                        map: map,
+                        draggable: true //make it draggable
+                    });
+                    //Listen for drag events!
+                    google.maps.event.addListener(marker, 'dragend', function(event){
+                        markerLocation();
+                    });
+                } else{
+                    //Marker has already been added, so just change its location.
+                    marker.setPosition(clickedLocation);
+                }
+                //Get the marker's location.
+                markerLocation();
+            });
 
             // Automatically center the map fitting all markers on the screen
             map.fitBounds(bounds);
@@ -55,9 +78,4 @@ function renderMap(data){
             this.setZoom(4);
             google.maps.event.removeListener(boundsListener);
         });
-
-   
-   
-   
-   
 }

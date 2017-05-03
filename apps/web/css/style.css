@@ -51,7 +51,6 @@ body {
     height: auto;
     width: 100%;
     display: table;
-    border-bottom: 5px solid #1FB5FC;
 }
 .full-width .full-col{
     padding-right: 0px;
@@ -66,6 +65,12 @@ body {
 .form-group .row{
     margin-bottom: 5px;
 }
+.panel-info a:hover{
+    color: white !important;
+}
+footer{
+    border-top: 5px solid #1FB5FC;
+}
 /* FIM DAFULT OPTIONS */
 
 
@@ -79,7 +84,6 @@ body {
     margin: 0px 5px;
 }
 .single-post {
-    border: 1px solid #efefef;
     margin-bottom: 20px;
 }
 .single-post img{
@@ -138,20 +142,12 @@ a:hover{
 .feed-map {
     width: 30%;
     position: absolute;
-    height: 550px;
     right: 0%;
-    overflow: auto;
     background-color: #ededed;
     top: 79px;
 }
-.feed-map #feed {
-    padding: 0px 13px;
-}
-.feed-map .single-post {
-    border: 0px solid #000 !important;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 3px;
+.panel-colapse-map .panel-body {
+    overflow: auto;
 }
 .feed-map .title-center {
     margin: 0px !important;
@@ -159,6 +155,10 @@ a:hover{
 .feed-map .title-center {
     padding: 7px 20px;
     width: 100%;
+}
+.feed-map .single-post {
+    border-bottom: 4px solid #1FB5FC;
+    padding-bottom: 20px;
 }
 .info-post-author {
     display: table;
