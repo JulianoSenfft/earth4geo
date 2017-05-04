@@ -3,7 +3,7 @@ function renderMap(data){
         var map;
         var bounds = new google.maps.LatLngBounds();
         var mapOptions = {
-            mapTypeId: 'roadmap',
+            mapTypeId: 'satellite',
             scrollwheel: false
         };
 

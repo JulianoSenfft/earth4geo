@@ -39,10 +39,6 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="index-user.php">Home</a></li>
-                    <li><a href="index-user.php">Atividades</a></li>
-                    <li><a href="index-user.php">Amigos</a></li>
-                    <li><a href="index-user.php">Grupos</a></li>
                     <li><a href="index-user.php">Seja Premium</a></li>
                 </ul>
                 <ul class="nav navbar-nav right-navbar-nav">

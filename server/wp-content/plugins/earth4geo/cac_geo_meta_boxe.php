@@ -50,6 +50,60 @@ function cac_geo_meta_boxes( $meta_boxes ) {
                 'id'   => 'estado',
                 'type' => 'text',
             ),
+            //TEXT
+            array(
+                'name' => 'Likes',
+                'id'   => 'likes',
+                'type' => 'textarea',
+            ),
+        ),
+    );
+    $meta_boxes[] = array(
+        'title'      => 'Dados do comentario',
+        'post_types' => 'comentarios',
+        'fields'     => array(
+            //TEXT
+            array(
+                'name' => 'Post ID',
+                'id'   => 'post_id',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Imagem',
+                'id'   => 'imagem',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Conteúdo',
+                'id'   => 'conteudo',
+                'type' => 'textarea',
+            ),
+            //TEXT
+            array(
+                'name' => 'Likes',
+                'id'   => 'likes',
+                'type' => 'textarea',
+            ),
+        ),
+    );
+    $meta_boxes[] = array(
+        'title'      => 'Dados da notificação',
+        'post_types' => 'notificacao',
+        'fields'     => array(
+            //TEXT
+            array(
+                'name' => 'Post ID',
+                'id'   => 'post_id',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Tipo de notificação',
+                'id'   => 'tipo_notificacao',
+                'type' => 'text',
+            ),
         ),
     );
     return $meta_boxes;

@@ -1,6 +1,7 @@
 <?php
 include("header.php");
 ?>
+    <script type="text/jsx" src="js/react/comments.jsx"></script>
     <script type="text/jsx" src="js/react/feeds.jsx"></script>
     <script type="text/jsx" src="js/react/map.jsx"></script>
     <script type="text/jsx" src="js/react/addPost.jsx"></script>

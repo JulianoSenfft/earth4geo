@@ -1,5 +1,4 @@
-
-var Feed = React.createClass({
+var Comments = React.createClass({
     
     getInitialState: function() {
         return {data: []};
@@ -102,4 +101,4 @@ var Feed = React.createClass({
             </div>
         );
     }
-});    
+});

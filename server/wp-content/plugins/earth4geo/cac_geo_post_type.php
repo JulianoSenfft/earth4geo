@@ -23,7 +23,7 @@ if(!function_exists("create_cac_geo_post_types")){
     }
     add_action( 'init', 'create_' . RADICALGEO . '_post_types' );
 }
-
+//POST TYPES GERADOS DIRETAMENTE NO WORDPRESS
 /*------------------       Post type PUBLICACOES    --------------*/
 /*add_action('init', 'create_publicacoes');
 function create_publicacoes() {

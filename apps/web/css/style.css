@@ -71,6 +71,19 @@ body {
 footer{
     border-top: 5px solid #1FB5FC;
 }
+.panel-group .panel {
+    border-radius: 0px !important;
+}
+.panel-heading {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+.panel {
+    border: 0px solid transparent !important;
+}
+.panel-title i {
+    margin-right: 10px;
+}
 /* FIM DAFULT OPTIONS */
 
 
@@ -143,7 +156,7 @@ a:hover{
     width: 30%;
     position: absolute;
     right: 0%;
-    background-color: #ededed;
+    background-color: #F5F5F5;
     top: 79px;
 }
 .panel-colapse-map .panel-body {
