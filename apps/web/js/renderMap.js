@@ -3,7 +3,7 @@ function renderMap(data){
         var map;
         var bounds = new google.maps.LatLngBounds();
         var mapOptions = {
-            mapTypeId: 'satellite',
+            mapTypeId: 'hybrid',
             scrollwheel: false
         };
 
