@@ -17,29 +17,31 @@ include("header.php");
             <Feed data={[]} />,
             document.getElementById('feed')
         );
+        ReactDOM.render(
+            <Feed data={[]} />,
+            document.getElementById('myfeed')
+        );
     </script>
 
     <body class="home has-full-map">
         <div id="main">
             
             <div class="full-width">
-                <div class="full-col col-md-12">
+                <div class="full-col col-md-9">
                     <div id="map" class='full-height'></div>
                 </div>
-            </div>
-            
-            <div class="container">
-                <div class="feed-map full-height">
+                <div class="full-col col-md-3">
+                    <div class="feed-map full-height">
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-info feed">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-atividades-recentes">
                                             <i class="fa fa-list-ul" aria-hidden="true"></i> Atividades recentes
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapse1" class="panel-colapse-map panel-collapse collapse in">
+                                <div id="collapse-atividades-recentes" class="panel-colapse-map panel-collapse collapse in">
                                     <div class="panel-body">
                                         <div id="feed"></div>
                                     </div>
@@ -48,12 +50,12 @@ include("header.php");
                             <div class="panel panel-info notificacoes">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-notificacoes">
                                             <i class="fa fa-bell" aria-hidden="true"></i> Notificações
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapse2" class="panel-colapse-map panel-collapse collapse">
+                                <div id="collapse-notificacoes" class="panel-colapse-map panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class='info-post-author'>
                                             <div class='author-photo photo-default-feed'>
@@ -101,11 +103,11 @@ include("header.php");
                             <div class="panel panel-info groups">
                                 <div class="panel-heading">
                                   <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-groups">
                                     <i class="fa fa-users" aria-hidden="true"></i> Grupos</a>
                                   </h4>
                                 </div>
-                                <div id="collapse3" class="panel-colapse-map panel-collapse collapse">
+                                <div id="collapse-groups" class="panel-colapse-map panel-collapse collapse">
                                     <div class="panel-body">
 
                                         <div class='info-post-author'>
@@ -135,10 +137,40 @@ include("header.php");
                                     </div>
                                 </div>
                             </div>
+                            <div class="panel panel-info my-posts">
+                                <div class="panel-heading">
+                                  <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-my-posts">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+ Meus posts</a>
+                                  </h4>
+                                </div>
+                                <div id="collapse-my-posts" class="panel-colapse-map panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div data-toggle="modal" data-target="#new-post-modal" class="new-post button-new-post">Adicionar novo post</div>
+                                        <div id="myfeed"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-info my-friends">
+                                <div class="panel-heading">
+                                  <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-my-friends">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Meus amigos</a>
+                                  </h4>
+                                </div>
+                                <div id="collapse-my-friends" class="panel-colapse-map panel-collapse collapse">
+                                    <div class="panel-body">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    
-                    
+                    </div>
                 </div>
+            </div>
+            
+            <div class="container">
+                <div id="add-post"></div>
             </div>
         </div>
 

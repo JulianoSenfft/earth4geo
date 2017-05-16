@@ -5,6 +5,6 @@ jQuery(document).ready(function(){
     var alturaFooter = jQuery("footer").height();
     altura = altura - alturaHeader - alturaFooter - 13;
     jQuery(".full-height").css({"height": altura}); 
-    altura = altura - 128;
+    altura = altura - 158;
     jQuery(".panel-colapse-map .panel-body").css("max-height", altura, "important"); 
 });

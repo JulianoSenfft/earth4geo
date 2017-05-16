@@ -1,0 +1,84 @@
+<?php
+/**
+ * Plugin Name: VA Simple Basic Auth
+ * Plugin URI: https://github.com/VisuAlive/va-simple-basic-auth
+ * Description: Simply activate the plugin, can set up a basic auth to dashboard and login screen.
+ * Author: KUCKLU
+ * Version: 1.1.0
+ * WordPress Version: 4.3
+ * PHP Version: 5.4
+ * Author URI: https://www.visualive.jp
+ * Domain Path: /langs
+ * Text Domain: va-simple-basic-auth
+ * Prefix: va_simplebasicauth_
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * @package    WordPress
+ * @subpackage VA Simple Basic Auth
+ * @author     KUCKLU <kuck1u@visualive.jp>
+ *             Copyright (C) 2016 KUCKLU & VisuAlive.
+ *             This program is free software; you can redistribute it and/or modify
+ *             it under the terms of the GNU General Public License as published by
+ *             the Free Software Foundation; either version 2 of the License, or
+ *             (at your option) any later version.
+ *             This program is distributed in the hope that it will be useful,
+ *             but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *             GNU General Public License for more details.
+ *             You should have received a copy of the GNU General Public License along
+ *             with this program; if not, write to the Free Software Foundation, Inc.,
+ *             51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *             It is also available through the world-wide-web at this URL:
+ *             http://www.gnu.org/licenses/gpl-2.0.txt
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+require_once dirname( __FILE__ ) . '/incs/defines.php';
+require_once dirname( __FILE__ ) . '/incs/functions.php';
+require_once dirname( __FILE__ ) . '/incs/back-compat.php';
+
+if ( true === va_simplebasicauth_version_check() ) :
+	require_once dirname( __FILE__ ) . '/incs/trait-instance.php';
+	require_once dirname( __FILE__ ) . '/incs/trait-variables.php';
+	require_once dirname( __FILE__ ) . '/incs/class-module-installer.php';
+	require_once dirname( __FILE__ ) . '/incs/class-module-basic-auth.php';
+
+	/**
+	 * Run plugin.
+	 */
+	add_action( 'plugins_loaded', function () {
+		if ( ! is_user_logged_in() ) {
+			$basic_auth = apply_filters( 'va_extra_settings_module_admin', \VASIMPLEBASICAUTH\Modules\BasicAuth::get_called_class() );
+
+			$basic_auth::get_instance();
+		}
+	} );
+
+	/**
+	 * Install.
+	 */
+	register_activation_hook( __FILE__, array(
+		\VASIMPLEBASICAUTH\Modules\Installer::get_called_class(),
+		'install',
+	) );
+
+	/**
+	 * Uninstall.
+	 */
+	register_activation_hook( __FILE__, function () {
+		register_uninstall_hook( __FILE__, array(
+			\VASIMPLEBASICAUTH\Modules\Installer::get_called_class(),
+			'uninstall',
+		) );
+	} );
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
+		register_deactivation_hook( __FILE__, array(
+			\VASIMPLEBASICAUTH\Modules\Installer::get_called_class(),
+			'uninstall',
+		) );
+	}
+endif;

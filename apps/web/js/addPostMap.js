@@ -1,60 +1,134 @@
-function addPostForm(){
-    console.log("a")
-    var map; //Will contain map object.
-    var marker = false; ////Has the user plotted their location marker?
+function addPostMapForm(){
+    
+    var addMap;
+    var markersArray = [];
+    var latlng = new google.maps.LatLng(-22.8986933, -43.0930278);
 
-    //Function called to initialize / create the map.
-    //This is called when the page has loaded.
-    function initMap() {
+    var options = {
+        zoom: 5,
+        mapTypeId: 'hybrid',
+        center: latlng
+    };
+        
+    addMap = new google.maps.Map(document.getElementById("postFormMap"), options);
+    var geocoder = new google.maps.Geocoder();
 
-        //The center location of our map.
-        var centerOfMap = new google.maps.LatLng(52.357971, -6.516758);
+    google.maps.event.addListener(addMap, 'click', function(event) {
 
-        //Map options.
-        var options = {
-          center: centerOfMap, //Set center.
-          zoom: 7 //The zoom value.
-        };
-
-        //Create the map object.
-        map = new google.maps.Map(document.getElementById('addPostFormMap'), options);
-
-        //Listen for any clicks on the map.
-        google.maps.event.addListener(map, 'click', function(event) {               
-            //Get the location that the user clicked.
-            var clickedLocation = event.latLng;
-            //If the marker hasn't been added.
-            if(marker === false){
-                //Create the marker.
-                marker = new google.maps.Marker({
-                    position: clickedLocation,
-                    map: map,
-                    draggable: true //make it draggable
-                });
-                //Listen for drag events!
-                google.maps.event.addListener(marker, 'dragend', function(event){
-                    markerLocation();
-                });
-            } else{
-                //Marker has already been added, so just change its location.
-                marker.setPosition(clickedLocation);
+        placeMarker(event.latLng);
+        geocoder.geocode({ 'latLng': event.latLng }, 
+            function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        //preencheCampos(endereco, cep, pais, estado, cidade, latLong)
+                        preencheCampos( results[0].formatted_address, extractFromAdress(results[0].address_components, "postal_code"), extractFromAdress(results[0].address_components, "country", "short"), extractFromAdress(results[0].address_components, "administrative_area_level_1", "short"), extractFromAdress(results[0].address_components, "locality"), event.latLng.lat, event.latLng.lng );
+                    }
+                }
             }
-            //Get the marker's location.
-            markerLocation();
+        );
+    });
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            
+            placeMarker(pos);
+            addMap.setCenter(pos);
+            
+            
+            geocoder.geocode({ 'latLng': pos }, 
+                function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            
+                            //preencheCampos(endereco, cep, pais, estado, cidade, latLong)
+                            preencheCampos( results[0].formatted_address, extractFromAdress(results[0].address_components, "postal_code"), extractFromAdress(results[0].address_components, "country", "short"), extractFromAdress(results[0].address_components, "administrative_area_level_1", "short"), extractFromAdress(results[0].address_components, "locality"), pos.lat, pos.lng );
+                        }
+                    }
+                }
+            );
+            
+            
+        }, function() {
+            handleLocationError(true, placeMarker, addMap.getCenter());
         });
+    } else {
+        handleLocationError(false, placeMarker, addMap.getCenter());
     }
 
-    //This function will get the marker's current location and then add the lat/long
-    //values to our textfields so that we can save the location.
-    function markerLocation(){
-        //Get location.
-        var currentLocation = marker.getPosition();
-        //Add lat and lng values to a field that we can save.
-        document.getElementById('lat').value = currentLocation.lat(); //latitude
-        document.getElementById('lng').value = currentLocation.lng(); //longitude
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
     }
 
+    
+    
+    
+    
+    //GMAP FUNCTIONS
+    function placeMarker(location) {
+        deleteOverlays();
 
-    //Load the map when the page has finished loading.
-    google.maps.event.addDomListener(window, 'load', initMap);
+        var marker = new google.maps.Marker({
+            position: location, 
+            map: addMap
+        });
+        markersArray.push(marker);
+    }
+    
+    function deleteOverlays() {
+        if (markersArray) {
+            for (i in markersArray) {
+                markersArray[i].setMap(null);
+            }
+        markersArray.length = 0;
+        }
+    }
+    
+    function extractFromAdress(components, type, lengthName){
+        for (var i=0; i<components.length; i++)
+            for (var j=0; j<components[i].types.length; j++)
+                if (components[i].types[j]==type){
+                    if(lengthName == "short"){
+                        return components[i].short_name;
+                    }else{
+                        return components[i].long_name;
+                    }
+                    
+                }
+        return "";
+    }
+    
+    jQuery('#new-post-modal').on('show.bs.modal', function() {
+       resizeMap();
+    })
+
+    function resizeMap() {
+       if(typeof addMap =="undefined") return;
+       setTimeout( function(){resizingMap();} , 400);
+    }
+    
+    function resizingMap() {
+       if(typeof addMap =="undefined") return;
+       var center = addMap.getCenter();
+       google.maps.event.trigger(addMap, "resize");
+       addMap.setCenter(center); 
+    }
+    
+    function preencheCampos(endereco, cep, pais, estado, cidade, lat, long){
+        
+        jQuery("#endereco").val(endereco)
+        jQuery("#cep").val(cep)
+        jQuery("#pais").val(pais)
+        jQuery("#estado").val(estado)
+        jQuery("#cidade").val(cidade)
+        jQuery("#latitude").val(lat)
+        jQuery("#longitude").val(long)
+    }
 }
