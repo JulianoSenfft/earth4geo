@@ -11,12 +11,23 @@ var Addpost = React.createClass({
     },
     
     addPost: function() {
-        console.log(request)
         
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/publicacao/8',
-            method: 'DELETE',
-            crossDomain: true,
+            url: request + '/server/wp-json/wp/v2/publicacao/',
+            method: 'POST',
+            data:{
+                status: "publish",
+                title: "teste",
+                meta_box: { 
+                    titulo: jQuery("#titulo").val(),
+                    conteudo: jQuery("#conteudo").val(),
+                    latitude: jQuery("#latitude").val(),
+                    longitude: jQuery("#longitude").val(),
+                    pais: jQuery("#pais").val(),
+                    estado: jQuery("#estado").val(),
+                    imagem: "http://static1.purebreak.com.br/articles/2/80/42/@/42174-um-leao-com-sua-juba-ao-vento-950x0-1.jpg"
+                },
+            },
             beforeSend: function ( xhr ) {
                 xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
             },
@@ -56,11 +67,11 @@ var Addpost = React.createClass({
                                     <hr />
                                     <div className="form-group">
                                         <label for="exampleInputEmail1">Titulo</label>
-                                        <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Titulo"></input>
+                                        <input type="text" className="form-control" id="titulo" placeholder="Titulo"></input>
                                     </div>
                                     <div className="form-group">
                                         <label for="exampleInputFile">Texto</label>
-                                        <textarea className="form-control" rows="3"></textarea>
+                                        <textarea id="conteudo" className="form-control" rows="3"></textarea>
                                     </div>
                                     <hr />
                                     <div className="form-group">
