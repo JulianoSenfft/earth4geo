@@ -33,6 +33,8 @@
         $domain = $_SERVER['SERVER_NAME'];
         if($domain == "macbook-pro-de-juliano.local"){
             $requests = "http://" . $domain . "/earth4geo";
+        }else{
+            $requests = "http://" . $domain;
         }
         ?>
         <script>
