@@ -36,13 +36,12 @@
         if($domain == "macbook-pro-de-juliano.local"){
             $requests = "http://" . $domain . "/earth4geo";
         }
-        if("http://hnserver.com.br"){
+        if($domain == "http://hnserver.com.br"){
             $requests = "http://" . $domain . "/~earth4geo";
         }
         ?>
         <script>
         var request = "<?php echo $requests; ?>";
-        alert(request)
         </script>
         
     </head>

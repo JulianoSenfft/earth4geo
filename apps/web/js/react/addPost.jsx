@@ -11,10 +11,10 @@ var Addpost = React.createClass({
     },
     
     addPost: function() {
-        console.log("teste")
+        console.log(request)
         
         $.ajax({
-            url: 'http://macbook-pro-de-juliano.local/earth4geo/server/wp-json/wp/v2/publicacao/31',
+            url: request + '/server/wp-json/wp/v2/publicacao/31',
             method: 'DELETE',
             crossDomain: true,
             beforeSend: function ( xhr ) {

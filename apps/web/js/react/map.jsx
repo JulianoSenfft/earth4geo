@@ -5,8 +5,9 @@ var Map = React.createClass({
     },
     
     componentDidMount: function() {
+        console.log(request + '/server/wp-json/wp/v2/publicacao')
         $.ajax({
-            url: 'http://macbook-pro-de-juliano.local/earth4geo/server/wp-json/wp/v2/publicacao',
+            url: request + '/server/wp-json/wp/v2/publicacao',
             method: 'GET',
             error: function(xhr, status, error) {
               var err = eval("(" + xhr.responseText + ")");
