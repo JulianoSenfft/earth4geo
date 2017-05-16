@@ -14,7 +14,7 @@ var Addpost = React.createClass({
         console.log(request)
         
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/publicacao/31',
+            url: request + '/server/wp-json/wp/v2/publicacao/8',
             method: 'DELETE',
             crossDomain: true,
             beforeSend: function ( xhr ) {
