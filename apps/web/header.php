@@ -31,10 +31,13 @@
         
         <?php
         $domain = $_SERVER['SERVER_NAME'];
+        
+        $requests = "http://" . $domain;
         if($domain == "macbook-pro-de-juliano.local"){
             $requests = "http://" . $domain . "/earth4geo";
-        }else{
-            $requests = "http://" . $domain;
+        }
+        if("http://hnserver.com.br"){
+            $requests = "http://" . $domain . "/~earth4geo";
         }
         ?>
         <script>
