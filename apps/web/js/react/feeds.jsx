@@ -6,6 +6,7 @@ var Feed = React.createClass({
     },
     
     componentDidMount: function() {
+        console.log(request + '/server/wp-json/wp/v2/publicacao')
         $.ajax({
             url: request + '/server/wp-json/wp/v2/publicacao',
             method: 'GET',
