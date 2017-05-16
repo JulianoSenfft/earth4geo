@@ -14,7 +14,7 @@ var Addpost = React.createClass({
         console.log("teste")
         
         $.ajax({
-            url: 'http://macbook-pro-de-juliano.local/earth4geo/server/wp-json/wp/v2/publicacao/13',
+            url: 'http://macbook-pro-de-juliano.local/earth4geo/server/wp-json/wp/v2/publicacao/31',
             method: 'DELETE',
             crossDomain: true,
             beforeSend: function ( xhr ) {

@@ -29,6 +29,17 @@
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaw1tH5Rps2SrSbrRxu1EJxn38lO4ZB94"
   type="text/javascript"></script>
         
+        <?php
+        $domain = $_SERVER['SERVER_NAME'];
+        if($domain == "macbook-pro-de-juliano.local"){
+            $requests = "http://" . $domain . "/earth4geo";
+        }
+        ?>
+        <script>
+        var request = "<?php echo $requests; ?>";
+        alert(request)
+        </script>
+        
     </head>
     <header>
         <nav class="navbar navbar-default">
