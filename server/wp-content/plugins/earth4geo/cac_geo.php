@@ -15,6 +15,8 @@ require_once dirname(__FILE__) . "/cac_geo_meta_boxe.php";
 require_once dirname(__FILE__) . "/cac_geo_post_type.php";
 require_once dirname(__FILE__) . "/cac_geo_role.php";
 
+add_filter( 'json_query_vars', 'filterJsonQueryVars' );
+
 
 // Aqui você pode carregar variáveis globais, que podem ser usados em qualquer arquivo ou plugin
 

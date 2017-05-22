@@ -47,6 +47,7 @@ function addPostMapForm(){
                             
                             //preencheCampos(endereco, cep, pais, estado, cidade, latLong)
                             preencheCampos( results[0].formatted_address, extractFromAdress(results[0].address_components, "postal_code"), extractFromAdress(results[0].address_components, "country", "short"), extractFromAdress(results[0].address_components, "administrative_area_level_1", "short"), extractFromAdress(results[0].address_components, "locality"), pos.lat, pos.lng );
+                            console.log(results[0])
                         }
                     }
                 }
@@ -66,10 +67,6 @@ function addPostMapForm(){
         'Error: The Geolocation service failed.' :
         'Error: Your browser doesn\'t support geolocation.');
     }
-
-    
-    
-    
     
     //GMAP FUNCTIONS
     function placeMarker(location) {

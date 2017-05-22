@@ -1,5 +1,50 @@
 
 /* DAFULT OPTIONS */
+
+img {
+    width: 100%;
+}
+.exclude i {
+    position: absolute;
+    right: 15px;
+    padding: 3px 5px;
+    cursor: pointer;
+    color: #8A8A8A;
+}
+.like i{
+    margin-right: 5px;
+}
+/*.full-post-info {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: #00000080;
+    height: 100%;
+}
+.full-post-info .modal-body{
+    height: 400px;
+    overflow: auto;
+}*/
+.comment-form{
+    display: table;
+    width: 100%;
+    margin-top: 25px;
+}
+.comentario {
+    margin-bottom: 10px;
+    border: 1px solid #d4d4d4;
+    padding: 10px 10px;
+    border-bottom: 2px solid #1FB5FC;
+}
+.date-hour {
+    color: #838383;
+    font-size: 11px;
+    border-bottom: 1px solid #EDEDED;
+    margin-bottom: 10px;
+}
+#button-add-post {
+    margin-top: 10px;
+}
 body{
     background-color: #f2f2f2 !important
 }
@@ -212,10 +257,14 @@ a:hover{
     display: table;
     width: 100%;
 }
+.vermais, .like {
+    cursor: pointer;
+}
 .action-custom-infos .like{
     width: 50%;
     float: left;
 }
+
 .action-custom-infos .comment{
     width: 50%;
     float: left;
@@ -239,4 +288,6 @@ a:hover{
     border-bottom: 1px solid #EDEDED;
     margin-bottom: 10px;
 }
+
+
 /* FIM NOTIFICACOES */

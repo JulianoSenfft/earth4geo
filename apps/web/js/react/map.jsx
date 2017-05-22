@@ -4,8 +4,7 @@ var Map = React.createClass({
         return {data: []};
     },
     
-    componentDidMount: function() {
-        console.log(request + '/server/wp-json/wp/v2/publicacao')
+    chamaAjax: function(){
         $.ajax({
             url: request + '/server/wp-json/wp/v2/publicacao',
             method: 'GET',
@@ -16,8 +15,17 @@ var Map = React.createClass({
             success: function(result) {
                 renderMap(result);
                 this.setState({data: result});
+                var posts = result;
             }.bind(this)
         });
+    },
+    
+    componentDidMount: function() {
+        this.chamaAjax();
+        
+        PubSub.subscribe('atualiza-lista-posts', function(topico){
+            this.chamaAjax();
+        }.bind(this));
     },
     
     render: function() {

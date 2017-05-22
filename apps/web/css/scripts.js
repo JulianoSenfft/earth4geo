@@ -7,4 +7,9 @@ jQuery(document).ready(function(){
     jQuery(".full-height").css({"height": altura}); 
     altura = altura - 158;
     jQuery(".panel-colapse-map .panel-body").css("max-height", altura, "important"); 
+    
+    jQuery(".close").click(function(){
+        jQuery(".full-post-info").hide();
+    
+    });
 });

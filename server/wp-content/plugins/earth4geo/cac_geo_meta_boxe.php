@@ -54,7 +54,7 @@ function cac_geo_meta_boxes( $meta_boxes ) {
             array(
                 'name' => 'Likes',
                 'id'   => 'likes',
-                'type' => 'textarea',
+                'type' => 'text',
             ),
         ),
     );

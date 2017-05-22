@@ -10,33 +10,70 @@ var Addpost = React.createClass({
         addPostMapForm();
     },
     
+    uploadImage: function(imageData, postID){
+        $.ajax({
+            url: request + '/server/wp-json/wp/v2/media/',
+            method: 'POST',
+            data: imageData,
+            contentType: false,
+            processData: false,
+            beforeSend: function ( xhr ) {
+                xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+            },
+            error: function(error) {
+                console.log(error)
+            },
+            success: function(result) {
+                $.ajax({
+                    url: request + '/server/wp-json/wp/v2/publicacao/' + postID,
+                    method: 'POST',
+                    data:{
+                        meta_box: {
+                            imagem: result.source_url
+                        },
+                    },
+                    beforeSend: function ( xhr ) {
+                        xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+                    },
+                    success: function(result) {
+                        PubSub.publish('atualiza-lista-posts');
+                    }.bind(this)
+                });
+            }.bind(this)
+        }); 
+    },
+    
     addPost: function() {
+        
+        var imageData = new FormData();
+        imageData.append( "file", $('input#imagem')[0].files[0]);
         
         $.ajax({
             url: request + '/server/wp-json/wp/v2/publicacao/',
             method: 'POST',
             data:{
                 status: "publish",
-                title: "teste",
+                title: jQuery("#titulo").val(),
                 meta_box: { 
                     titulo: jQuery("#titulo").val(),
                     conteudo: jQuery("#conteudo").val(),
                     latitude: jQuery("#latitude").val(),
                     longitude: jQuery("#longitude").val(),
                     pais: jQuery("#pais").val(),
-                    estado: jQuery("#estado").val(),
-                    imagem: "http://static1.purebreak.com.br/articles/2/80/42/@/42174-um-leao-com-sua-juba-ao-vento-950x0-1.jpg"
                 },
             },
             beforeSend: function ( xhr ) {
                 xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
             },
             error: function(error) {
-                console.log(error)
                 console.log(error.responseJSON.message)
             },
             success: function(result) {
-                console.log(result)
+                if($('input#imagem').val()){
+                    this.uploadImage(imageData, result.id);
+                }else{
+                    PubSub.publish('atualiza-lista-posts');
+                }
             }.bind(this)
         });
     },
@@ -346,6 +383,7 @@ var Addpost = React.createClass({
                                                 <label for="estado">Estado</label>
                                                 
                                                 <input type="text" className="form-control" id="estado" placeholder="Digite o codigo do seu estado"></input>
+                                                <input type="hidden" id="fulladress" ></input>
                                             </div>
                                             <div className="col-md-6">
                                                 <label for="cidade">Cidade</label>
@@ -372,7 +410,7 @@ var Addpost = React.createClass({
                                     <hr />
                                     <div className="form-group">
                                         <label for="foto">Foto</label>
-                                        <input type="file" id="foto"></input>
+                                        <input type="file" id="imagem"></input>
                                         <p className="help-block">As fotos devem ter, no máximo, 1mb de tamanho.</p>
                                     </div>
                                 </form>

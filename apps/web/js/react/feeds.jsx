@@ -5,8 +5,7 @@ var Feed = React.createClass({
         return {data: []};
     },
     
-    componentDidMount: function() {
-        console.log(request + '/server/wp-json/wp/v2/publicacao')
+    getPostList: function(){
         $.ajax({
             url: request + '/server/wp-json/wp/v2/publicacao',
             method: 'GET',
@@ -19,19 +18,27 @@ var Feed = React.createClass({
             }.bind(this)
         });
     },
+    
+    componentDidMount: function() {
+        
+        this.getPostList();
+        
+        PubSub.subscribe('atualiza-lista-posts', function(topico){
+            this.getPostList();
+        }.bind(this));
+    },
+    
+    viewMore: function(data) {
+        PubSub.publish('carrega-ver-mais', data);
+    },
 
     render: function() {
+        var self = this;
         return (
             <div>
                 {this.state.data.map(function(data, i) {
                     
-                    var titulo = data.meta_box.titulo
-                    var latitude = data.meta_box.latitude
-                    var longitude = data.meta_box.longitude
-                    var pais = data.meta_box.pais
-                    var estado = data.meta_box.estado
-                    var conteudo = data.meta_box.conteudo
-                    var imagem = data.meta_box.imagem
+                    var id = data.id
                     var likes = data.meta_box.likes
                     
                     return (
@@ -46,61 +53,41 @@ var Feed = React.createClass({
                             </div>
                             
                             <div className='info-post-title'>
-                                <h4 key={'post-title-'+ i}> {titulo} </h4>
+                                <h4 key={'post-title-'+ i}> {data.meta_box.titulo} </h4>
                             </div>
                             
-                            {conteudo ? (   
+                            {data.meta_box.conteudo ? (   
                                 <div className='info-post-content'>
                                     <p className={'post-content-'+ i} key={'post-content-'+ i}>
-                                        {conteudo}
+                                        {data.meta_box.conteudo}
                                         <span className='read-more'></span>
                                     </p>
                                 </div>
                             ):( <span></span> )} 
                             
-                            {estado && pais ? (
+                            {data.meta_box.pais && data.meta_box.estado ? (
                                 <div className='info-post'> 
                                     <i className='fa fa-map-marker' />
                                     <span className='pais'>
-                                        {pais}
+                                        {data.meta_box.pais}
                                     </span> 
                                     <span className='estado'>
-                                        {estado}
+                                        {data.meta_box.estado}
                                     </span>
                                 </div>
                             ):( <span></span> )} 
                             
-                            {imagem ? (   
+                            {data.meta_box.imagem ? ( 
                                 <div className="featured-photo">
-                                    <img src={imagem} /> 
+                                    <img src={data.meta_box.imagem} /> 
                                 </div>
                             ):( <span></span> )}
-                            
-                            <div className="custom-infos">
-                                <div className="action-custom-infos">
-                                    <div className="like">
-                                        <span className="likes-number">
-                                            {likes ? (
-                                                likes
-                                            ):( <span>Nenhuma curtida</span> )}
-                                        </span>
-                                        <i className="fa fa-thumbs-o-up" aria-hidden="true" data-action="like"></i>
-                                    </div>
-                                    <div className="comment" data-action="view-comments">
-                                        <span className="comments-number">
-                                            {likes ? (
-                                                likes
-                                            ):( <span>Nenhum comentário</span> )}
-                                            <div id="comments"></div>
-                                        </span>
-                                        <i className="fa fa-comment-o" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="infoPost" className="vermais" onClick={function(){self.viewMore(data)}} data-toggle="modal" data-target="#view-post-modal">Ver Mais</div>
                         </div>
                     )
                 })}
             </div>
         );
     }
-});    
+
+});  

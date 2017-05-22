@@ -5,7 +5,7 @@
         <title>Earth 4 Geo</title>
         <script type="text/javascript" src="js/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css" crossorigin="anonymous">
         <script type="text/javascript" src="css/scripts.js"></script>
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
         
@@ -29,6 +29,11 @@
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaw1tH5Rps2SrSbrRxu1EJxn38lO4ZB94"
   type="text/javascript"></script>
         
+        
+        <!-- PUBSUB -->
+        <script src="https://cdn.jsdelivr.net/pubsubjs/1.4.2/pubsub.min.js"></script>
+        <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/markercluster/src/markerclusterer.js"></script>
+        
         <?php
         $domain = $_SERVER['SERVER_NAME'];
         
@@ -39,6 +44,7 @@
         ?>
         <script>
             var request = "<?php echo $requests; ?>";
+            var current_user = 1;
         </script>
         
     </head>

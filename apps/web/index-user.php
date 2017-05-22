@@ -6,6 +6,7 @@ include("header.php");
     <script type="text/jsx" src="js/react/map.jsx"></script>
     <script type="text/jsx" src="js/react/addPost.jsx"></script>
     <script type="text/jsx" src="js/renderMap.js"></script>
+    <script type="text/jsx" src="js/react/postInfo.jsx"></script>
     <script type="text/javascript" src="js/addPostMap.js"></script>
 
     <script type="text/jsx">
@@ -172,6 +173,7 @@ include("header.php");
             <div class="container">
                 <div id="add-post"></div>
             </div>
+            <div id="view-post"></div>
         </div>
 
     </body>
