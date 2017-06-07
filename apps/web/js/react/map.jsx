@@ -6,7 +6,7 @@ var Map = React.createClass({
     
     chamaAjax: function(){
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/publicacao',
+            url: request + '/server/wp-json/wp/v2/publicacao?_embed',
             method: 'GET',
             error: function(xhr, status, error) {
               var err = eval("(" + xhr.responseText + ")");

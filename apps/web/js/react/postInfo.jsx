@@ -10,16 +10,18 @@ var PostInfo = React.createClass({
     
     componentDidMount: function() {
         
-        this.getComments();
         
         PubSub.subscribe('carrega-ver-mais', function(topico, data){
             $("#view-post-modal").modal()
             this.setState({data: data});
+            this.setState({comments: []});
+            this.setState({likes: []});
+            this.getComments(data.id);
             this.getLikes(data.id);
         }.bind(this));
         PubSub.subscribe('comments-has-change', function(topico, data){
             jQuery("#comentario").val("");
-            this.getComments();
+            this.getComments(data.meta_box.post_id);
         }.bind(this));
         
     },
@@ -45,7 +47,7 @@ var PostInfo = React.createClass({
         
         var users_liked = [];
         
-        curtiu = 0;
+        var curtiu = 0;
         for (i = 0; i < this.state.likes.length; i++) {
             users_liked[i] = this.state.likes[i];
             if(this.state.likes[i] == user_id){
@@ -124,7 +126,7 @@ var PostInfo = React.createClass({
         });
     },
     
-    addComment: function() {
+    addComment: function(post_id) {
         $.ajax({
             url: request + '/server/wp-json/wp/v2/comentarios',
             method: 'POST',
@@ -148,9 +150,10 @@ var PostInfo = React.createClass({
         });
     },
     
-    getComments: function() {
+    getComments: function(post_id) {
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/comentarios?filter[order]=ASC',
+            url: request + '/server/wp-json/wp/v2/comentarios?filter[order]=ASC&filter[meta_key]=post_id&filter[meta_value]=' + post_id,
+            //url: request + '/server/wp-json/wp/v2/comentarios?filter[order]=ASC',
             method: 'GET',
             beforeSend: function ( xhr ) {
                 xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
@@ -186,6 +189,8 @@ var PostInfo = React.createClass({
         
         var dados = this.state.data;
         
+        console.log(this.state.data)
+        
         return (
             <div>
                 {dados.length != 0 &&
@@ -194,19 +199,19 @@ var PostInfo = React.createClass({
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                <h4 className="modal-title">Visualizar publicação</h4>
+                                
+                                <div className='info-post-author'>
+                                    <div className='author-photo photo-default-feed'>
+                                        <img className='photo' src={dados._embedded.author[0].description}></img>
+                                    </div>
+                                    <div className='author-name'>
+                                        {dados._embedded.author[0].name}
+                                    </div>
+                                </div>
                             </div>
                             <div className="modal-body">
                                 <div className="row">
                                     <div className="col-md-12 author">
-                                        <div className='info-post-author'>
-                                            <div className='author-photo photo-default-feed'>
-                                                <img className='photo' src='https://pbs.twimg.com/profile_images/643969868396670976/xA4pTpYb_400x400.png'></img>
-                                            </div>
-                                            <div className='author-name'>
-                                                Juliano Senfft
-                                            </div>
-                                        </div>
                                         <div className='info-post-title'>
                                             <h4>{this.state.data.meta_box.titulo}</h4>
                                         </div>
@@ -271,7 +276,7 @@ var PostInfo = React.createClass({
                                         <div className="new-comment">
                                             <form className="comment-form">
                                                 <div className="form-group">
-                                                    <textarea className="form-control comment-area" id="comentario" name="conteudo" data-post-id={this.state.data.meta_box.id} ></textarea>
+                                                    <textarea className="form-control comment-area" id="comentario" name="conteudo" data-post-id={this.state.data.id} ></textarea>
                                                     <button onClick={self.addComment} id="button-add-post" type="button" className="btn btn-default align-left">Comentar</button>
                                                 </div>
                                             </form>

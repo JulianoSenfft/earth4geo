@@ -9,14 +9,16 @@
         <script type="text/javascript" src="css/scripts.js"></script>
         <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
         
+        
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> 
 
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+        
         
         <!-- REACT JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
@@ -33,6 +35,9 @@
         <!-- PUBSUB -->
         <script src="https://cdn.jsdelivr.net/pubsubjs/1.4.2/pubsub.min.js"></script>
         <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/markercluster/src/markerclusterer.js"></script>
+        
+        <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/storage.js"></script>
+        <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/message.js"></script>
         
         <?php
         $domain = $_SERVER['SERVER_NAME'];
@@ -52,7 +57,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index-user.php">
+                    <a class="navbar-brand" href="index.php">
                         <img src="http://hnserver.com.br/~earth4geo/logo_earth_4_geo.png" />
                     </a>
                 </div>
@@ -60,6 +65,7 @@
                 </ul>
                 <ul class="nav navbar-nav right-navbar-nav">
                     <li><a href="index-user.php">Seja Premium</a></li>
+                    <li><a href="login.php">Login</a></li>
                     <li><a href="minha-conta.php">Minha Conta</a></li>
                     <li><a href="sair.php">Sair</a></li>
                 </ul>

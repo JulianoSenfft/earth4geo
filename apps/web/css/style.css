@@ -1,6 +1,13 @@
 
 /* DAFULT OPTIONS */
-
+.user-photo {
+    width: 50%;
+    margin: 0 auto;
+}
+.current-user-photo {
+    border-radius: 50%;
+    margin: 15px 0px;
+}
 img {
     width: 100%;
 }
@@ -155,6 +162,11 @@ footer{
 
 
 /* DAFULT FEED */
+.info-post-title-feed{
+    padding-top: 5px;
+    border-top: 1px solid #e6e6e6;
+    margin-top: 15px;
+}
 .info-post {
     border-top: 1px solid #EDEDED;
     padding: 2px 0px;
@@ -234,10 +246,9 @@ a:hover{
     padding-bottom: 20px;
 }
 .info-post-author {
-    display: table;
+    display: flex;
     width: 100%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #EDEDED;
+    align-items: center;
 }
 .photo-default-feed {
     width: 50px;
@@ -245,9 +256,8 @@ a:hover{
     float: left;
 }
 .author-name {
-    float: left;
-    margin-left: 15px;
-    line-height: 50px;
+    margin-left: 5px;
+    height: auto;
 }
 .photo-default-feed .photo{
     border-radius: 50%;

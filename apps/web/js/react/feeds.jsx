@@ -2,12 +2,15 @@
 var Feed = React.createClass({
     
     getInitialState: function() {
-        return {data: []};
+        return {
+            data: [],
+            loading: true,
+        };
     },
     
     getPostList: function(){
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/publicacao',
+            url: request + '/server/wp-json/wp/v2/publicacao?_embed',
             method: 'GET',
             error: function(xhr, status, error) {
               var err = eval("(" + xhr.responseText + ")");
@@ -45,14 +48,14 @@ var Feed = React.createClass({
                         <div className='single-post'>
                             <div className='info-post-author'>
                                 <div className='author-photo photo-default-feed'>
-                                    <img className='photo' src='https://pbs.twimg.com/profile_images/643969868396670976/xA4pTpYb_400x400.png'></img>
+                                    <img className='photo' src={data._embedded.author[0].description}></img>
                                 </div>
                                 <div className='author-name'>
-                                    Juliano Senfft publicou um artigo
+                                    {data._embedded.author[0].name} publicou um artigo
                                 </div>
                             </div>
                             
-                            <div className='info-post-title'>
+                            <div className='info-post-title-feed'>
                                 <h4 key={'post-title-'+ i}> {data.meta_box.titulo} </h4>
                             </div>
                             
@@ -77,7 +80,7 @@ var Feed = React.createClass({
                                 </div>
                             ):( <span></span> )} 
                             
-                            {data.meta_box.imagem ? ( 
+                            {data.meta_box.imagem ? (
                                 <div className="featured-photo">
                                     <img src={data.meta_box.imagem} /> 
                                 </div>

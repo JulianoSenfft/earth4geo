@@ -11,6 +11,7 @@ var Addpost = React.createClass({
     },
     
     uploadImage: function(imageData, postID){
+        var auth = checkCookie("earth4geo_crypt")
         $.ajax({
             url: request + '/server/wp-json/wp/v2/media/',
             method: 'POST',
@@ -18,7 +19,7 @@ var Addpost = React.createClass({
             contentType: false,
             processData: false,
             beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
             },
             error: function(error) {
                 console.log(error)
@@ -33,7 +34,7 @@ var Addpost = React.createClass({
                         },
                     },
                     beforeSend: function ( xhr ) {
-                        xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+                        xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
                     },
                     success: function(result) {
                         PubSub.publish('atualiza-lista-posts');
@@ -47,23 +48,26 @@ var Addpost = React.createClass({
         
         var imageData = new FormData();
         imageData.append( "file", $('input#imagem')[0].files[0]);
+        var user_id = checkCookie()
+        var auth = checkCookie("earth4geo_crypt")
         
         $.ajax({
             url: request + '/server/wp-json/wp/v2/publicacao/',
             method: 'POST',
             data:{
                 status: "publish",
+                author: user_id,
                 title: jQuery("#titulo").val(),
                 meta_box: { 
                     titulo: jQuery("#titulo").val(),
                     conteudo: jQuery("#conteudo").val(),
                     latitude: jQuery("#latitude").val(),
                     longitude: jQuery("#longitude").val(),
-                    pais: jQuery("#pais").val(),
+                    pais: jQuery("#pais").val()
                 },
             },
             beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
             },
             error: function(error) {
                 console.log(error.responseJSON.message)
@@ -91,15 +95,18 @@ var Addpost = React.createClass({
                             <div className="modal-body">
                                 <form>
                                     <div className="form-group">
-                                        <label className="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"></input> Público
-                                        </label>
-                                        <label className="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"></input> Privado
-                                        </label>
-                                        <label className="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"></input> Somente para mim
-                                        </label>
+                                        <fieldset>
+                                            <legend>Details</legend>
+                                            <label className="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"></input> Público
+                                            </label>
+                                            <label className="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"></input> Privado
+                                            </label>
+                                            <label className="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"></input> Somente para mim
+                                            </label>
+                                        </fieldset>
                                     </div>
                                     <hr />
                                     <div className="form-group">
@@ -383,7 +390,6 @@ var Addpost = React.createClass({
                                                 <label for="estado">Estado</label>
                                                 
                                                 <input type="text" className="form-control" id="estado" placeholder="Digite o codigo do seu estado"></input>
-                                                <input type="hidden" id="fulladress" ></input>
                                             </div>
                                             <div className="col-md-6">
                                                 <label for="cidade">Cidade</label>

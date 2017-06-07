@@ -13,8 +13,9 @@ function renderMap(data){
 
         // Loop through our array of markers & place each one on the map 
         var markers = []
-    
-        for( i = 0; i < data.length; i++ ) {
+        
+        
+        for( var i = 0; i < data.length; i++ ) {
             
             var position = new google.maps.LatLng(data[i].meta_box.latitude, data[i].meta_box.longitude);
             bounds.extend(position);

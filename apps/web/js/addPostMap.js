@@ -21,7 +21,15 @@ function addPostMapForm(){
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[0]) {
                         //preencheCampos(endereco, cep, pais, estado, cidade, latLong)
-                        preencheCampos( results[0].formatted_address, extractFromAdress(results[0].address_components, "postal_code"), extractFromAdress(results[0].address_components, "country", "short"), extractFromAdress(results[0].address_components, "administrative_area_level_1", "short"), extractFromAdress(results[0].address_components, "locality"), event.latLng.lat, event.latLng.lng );
+                        preencheCampos( 
+                            results[0].formatted_address, 
+                            extractFromAdress(results[0].address_components, "postal_code"), 
+                            extractFromAdress(results[0].address_components, "country", "short"), 
+                            extractFromAdress(results[0].address_components, "administrative_area_level_1", "short"), 
+                            extractFromAdress(results[0].address_components, "locality"), 
+                            event.latLng.lat, 
+                            event.latLng.lng
+                        );
                     }
                 }
             }
@@ -38,16 +46,12 @@ function addPostMapForm(){
             
             placeMarker(pos);
             addMap.setCenter(pos);
-            
-            
             geocoder.geocode({ 'latLng': pos }, 
                 function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
-                            
                             //preencheCampos(endereco, cep, pais, estado, cidade, latLong)
                             preencheCampos( results[0].formatted_address, extractFromAdress(results[0].address_components, "postal_code"), extractFromAdress(results[0].address_components, "country", "short"), extractFromAdress(results[0].address_components, "administrative_area_level_1", "short"), extractFromAdress(results[0].address_components, "locality"), pos.lat, pos.lng );
-                            console.log(results[0])
                         }
                     }
                 }
