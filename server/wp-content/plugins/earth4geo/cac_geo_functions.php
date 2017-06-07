@@ -12,15 +12,13 @@ if(!function_exists("autentica_usuario")){
             $login_data['user_login'] = $user;
             $login_data['user_password'] = $pass;
             $login_data['remember'] = $remember;
-            $user_verify = wp_signon( $login_data, false );
+            $user_verify = wp_authenticate( $user, $pass );
 
             if ( is_wp_error($user_verify) ) {
                 header('HTTP/1.1 503 Service Unavailable');
             } else {
                 echo $user_verify->ID;
             }
-            
-            wp_logout();
             die();
         }
     }
