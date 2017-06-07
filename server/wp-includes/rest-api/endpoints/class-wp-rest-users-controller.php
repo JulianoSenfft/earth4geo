@@ -443,9 +443,9 @@ class WP_REST_Users_Controller extends WP_REST_Controller {
 	 */
 	public function create_item_permissions_check( $request ) {
 
-		if ( ! current_user_can( 'create_users' ) ) {
+		/*if ( ! current_user_can( 'create_users' ) ) {
 			return new WP_Error( 'rest_cannot_create_user', __( 'Sorry, you are not allowed to create new users.' ), array( 'status' => rest_authorization_required_code() ) );
-		}
+		}*/
 
 		return true;
 	}
