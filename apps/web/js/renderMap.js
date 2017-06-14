@@ -40,7 +40,6 @@ function renderMap(data){
         }
     
         // Automatically center the map fitting all markers on the screen
-        console.log(bounds)
         map.fitBounds(bounds);
     
     

@@ -23,21 +23,19 @@
         <!-- REACT JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
         <script src="https://unpkg.com/babel-standalone@6.24.0/babel.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
          
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaw1tH5Rps2SrSbrRxu1EJxn38lO4ZB94"
   type="text/javascript"></script>
         
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
         
         <!-- PUBSUB -->
         <script src="https://cdn.jsdelivr.net/pubsubjs/1.4.2/pubsub.min.js"></script>
         <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/markercluster/src/markerclusterer.js"></script>
-        
-        <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/storage.js"></script>
-        <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/message.js"></script>
         
         <?php
         $domain = $_SERVER['SERVER_NAME'];
@@ -47,9 +45,21 @@
             $requests = "http://" . $domain . "/earth4geo";
         }
         ?>
+        
+        <script src="<?php echo $requests; ?>/apps/web/js/storage.js"></script>
+        <script src="<?php echo $requests; ?>/apps/web/js/message.js"></script>
+        
         <script>
             var request = "<?php echo $requests; ?>";
-            var current_user = 1;
+            var current_user = checkCookie();
+        </script>
+        
+        <script src="<?php echo $requests; ?>/apps/web/js/react/navMenu.jsx" type="text/jsx"></script>
+        
+        <script>
+        jQuery(document).ready(function(){
+            jQuery('[data-toggle="tooltip"]').tooltip();  
+        });
         </script>
         
     </head>
@@ -61,15 +71,7 @@
                         <img src="http://hnserver.com.br/~earth4geo/logo_earth_4_geo.png" />
                     </a>
                 </div>
-                <ul class="nav navbar-nav">
-                </ul>
-                <ul class="nav navbar-nav right-navbar-nav">
-                    <li><a href="index-user.php">Seja Premium</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="registrar.php">Registrar</a></li>
-                    <li><a href="minha-conta.php">Minha Conta</a></li>
-                    <li><a href="sair.php">Sair</a></li>
-                </ul>
+                <div id="navmenu"></div>
             </div>
         </nav>
     </header>

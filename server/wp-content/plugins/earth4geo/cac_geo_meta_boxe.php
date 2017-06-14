@@ -10,8 +10,26 @@ function cac_geo_meta_boxes( $meta_boxes ) {
         'fields'     => array(
             //TEXT
             array(
+                'name' => 'Tipo',
+                'id'   => 'tipo',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Privacidade',
+                'id'   => 'privacidade',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
                 'name' => 'Titulo',
                 'id'   => 'titulo',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Tags',
+                'id'   => 'tags',
                 'type' => 'text',
             ),
             //TEXT
@@ -48,6 +66,12 @@ function cac_geo_meta_boxes( $meta_boxes ) {
             array(
                 'name' => 'Estado',
                 'id'   => 'estado',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Ajuda Localização',
+                'id'   => 'ajuda_localizacao',
                 'type' => 'text',
             ),
             //TEXT

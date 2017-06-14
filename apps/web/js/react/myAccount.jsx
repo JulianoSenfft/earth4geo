@@ -96,7 +96,6 @@ var MyAccount = React.createClass({
             },
             success: function(result) {
                 this.setState({data: result});
-                console.log(result)
             }.bind(this)
         });
     },
@@ -106,9 +105,7 @@ var MyAccount = React.createClass({
             <div>
                 
                 <form className="form-horizontal2" method="post" action="#">
-
                     <div className="row">
-
                         <div className="col-md-4">
                             <div className="form-group">
                                 <div className="user-photo">
@@ -119,7 +116,6 @@ var MyAccount = React.createClass({
                                 </div>
                                 <input type="file" id="user-photo-file" className="custom-file-input" />
                                 <span className="custom-file-control"></span>
-
                             </div>
                         </div>
 

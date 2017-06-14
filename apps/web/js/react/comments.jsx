@@ -1,7 +1,9 @@
 var Comments = React.createClass({
     
     getInitialState: function() {
-        return {data: []};
+        return {
+            data: []
+        };
     },
     
     componentDidMount: function() {

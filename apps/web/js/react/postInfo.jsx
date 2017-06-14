@@ -4,12 +4,11 @@ var PostInfo = React.createClass({
         return {
             data: [],
             comments: [],
-            likes: []
+            likes: [],
         };
     },
     
     componentDidMount: function() {
-        
         
         PubSub.subscribe('carrega-ver-mais', function(topico, data){
             $("#view-post-modal").modal()
@@ -22,6 +21,13 @@ var PostInfo = React.createClass({
         PubSub.subscribe('comments-has-change', function(topico, data){
             jQuery("#comentario").val("");
             this.getComments(data.meta_box.post_id);
+        }.bind(this));
+        PubSub.subscribe('loading-comments', function(topico, data){
+            if(data == "init"){
+                jQuery(".loading-comment").show();
+            }else{
+                jQuery(".loading-comment").hide();
+            }
         }.bind(this));
         
     },
@@ -72,9 +78,6 @@ var PostInfo = React.createClass({
             
             this.desCurtir(post_id, users_liked)
             this.setState({likes: users_liked});
-            
-            console.log("DESCURTIR USERS LIKED")
-            console.log(users_liked)
         }
     },
     
@@ -127,6 +130,12 @@ var PostInfo = React.createClass({
     },
     
     addComment: function(post_id) {
+       
+        PubSub.publish('loading-comments', "init");
+        
+        var user_id = checkCookie()
+        var auth = checkCookie("earth4geo_crypt")
+        
         $.ajax({
             url: request + '/server/wp-json/wp/v2/comentarios',
             method: 'POST',
@@ -139,7 +148,7 @@ var PostInfo = React.createClass({
                 },
             },
             beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
             },
             error: function(error) {
                 console.log(error.responseJSON.message)
@@ -151,28 +160,32 @@ var PostInfo = React.createClass({
     },
     
     getComments: function(post_id) {
+        PubSub.publish('loading-comments', "init");
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/comentarios?filter[order]=ASC&filter[meta_key]=post_id&filter[meta_value]=' + post_id,
+            url: request + '/server/wp-json/wp/v2/comentarios?_embed&filter[order]=ASC&filter[meta_key]=post_id&filter[meta_value]=' + post_id,
             //url: request + '/server/wp-json/wp/v2/comentarios?filter[order]=ASC',
             method: 'GET',
-            beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
-            },
             error: function(error) {
                 console.log(error.responseJSON.message)
             },
             success: function(result) {
                 this.setState({comments: result});
+                PubSub.publish('loading-comments', "end");
             }.bind(this)
         });
     },
     
     removerComments: function(id) {
+        PubSub.publish('loading-comments', "init");
+        
+        var user_id = checkCookie()
+        var auth = checkCookie("earth4geo_crypt")
+        
         $.ajax({
             url: request + '/server/wp-json/wp/v2/comentarios/' + id,
             method: 'DELETE',
             beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic aG5hZG1pbjptajAzMDYwMQ==' );
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
             },
             error: function(error) {
                 console.log(error.responseJSON.message)
@@ -182,14 +195,32 @@ var PostInfo = React.createClass({
             }.bind(this)
         });
     },
-
+    
+    isPostAuthor: function(post_author_id){
+        var user_id = checkCookie()
+        if(post_author_id == user_id){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    
+    isCommentAuthor: function(comment_author_id){
+        var user_id = checkCookie()
+        if(comment_author_id == user_id){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    
     render: function() {
         
         var self = this;
         
         var dados = this.state.data;
         
-        console.log(this.state.data)
+        var isPostAuthor = self.isPostAuthor(dados.author);
         
         return (
             <div>
@@ -249,29 +280,35 @@ var PostInfo = React.createClass({
                                         </div>
                                         <div className="comentarios">
                                             {this.state.comments.map(function(data, i) {
-                                                    return (
-                                                        <div>
+                                                
+                                                return (
+                                                    <div>
+                                                        {self.isCommentAuthor(data.author) ? ( 
                                                             <span className="exclude" onClick={function(){self.removerComments(data.id)}}><i className="fa fa-times"></i></span>
-                                                            <div className="comentario">
-                                                                <div className='info-post-author'>
-                                                                    <div className='author-photo photo-default-feed'>
-                                                                        <img className='photo' src='https://pbs.twimg.com/profile_images/643969868396670976/xA4pTpYb_400x400.png'></img>
-                                                                    </div>
-                                                                    <div className='author-name'>
-                                                                        Juliano Senfft
-                                                                    </div>
+                                                        ):( <span></span> )}
+                                                        <div className="comentario">
+                                                            <div className='info-post-author'>
+                                                                <div className='author-photo photo-default-feed'>
+                                                                    <img className='photo' src=
+                                                                    {data._embedded.author[0].description}></img>
                                                                 </div>
-                                                                <div className="date-hour">
-                                                                    {new Date(data.date).toLocaleDateString()} às {new Date(data.date).toLocaleTimeString()}
-                                                                </div>
-                                                                <div className="conteudo-comentarios">
-                                                                    {data.meta_box.conteudo}
+                                                                <div className='author-name'>
+                                                                    {data._embedded.author[0].name}
                                                                 </div>
                                                             </div>
+                                                            <div className="date-hour">
+                                                                {new Date(data.date).toLocaleDateString()} às {new Date(data.date).toLocaleTimeString()}
+                                                            </div>
+                                                            <div className="conteudo-comentarios">
+                                                                {data.meta_box.conteudo}
+                                                            </div>
                                                         </div>
-                                                    )
-                                                })
-                                            }
+                                                    </div>
+                                                )
+                                            })}
+                                            <div className="loader loading-comment">
+                                                <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                            </div>
                                         </div>
                                         <div className="new-comment">
                                             <form className="comment-form">
@@ -294,9 +331,5 @@ var PostInfo = React.createClass({
             </div>
         );
     }
+    
 });
-
-ReactDOM.render(
-    <PostInfo data={[]} />,
-    document.getElementById('view-post')
-);

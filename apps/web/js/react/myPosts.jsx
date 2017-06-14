@@ -1,4 +1,4 @@
-var Feed = React.createClass({
+var MyPosts = React.createClass({
     
     getInitialState: function() {
         return {
@@ -8,8 +8,11 @@ var Feed = React.createClass({
     },
     
     getPostList: function(){
+        
+        var user_id = checkCookie();
+        
         $.ajax({
-            url: request + '/server/wp-json/wp/v2/publicacao?_embed',
+            url: request + '/server/wp-json/wp/v2/publicacao?_embed&filter[author]=' + user_id,
             method: 'GET',
             error: function(xhr, status, error) {
               var err = eval("(" + xhr.responseText + ")");
@@ -31,7 +34,12 @@ var Feed = React.createClass({
         
     },
     
+    viewMore: function(data) {
+        PubSub.publish('carrega-ver-mais', data);
+    },
+
     render: function() {
+        var self = this;
         return (
             <div>
                 {this.state.data.map(function(data, i) {

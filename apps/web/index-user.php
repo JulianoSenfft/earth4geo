@@ -3,10 +3,13 @@ include("header.php");
 ?>
     <script type="text/jsx" src="js/react/comments.jsx"></script>
     <script type="text/jsx" src="js/react/feeds.jsx"></script>
+    <script type="text/jsx" src="js/react/myPosts.jsx"></script>
     <script type="text/jsx" src="js/react/map.jsx"></script>
+    <script type="text/jsx" src="js/react/renderedToolTip.jsx"></script>
     <script type="text/jsx" src="js/react/addPost.jsx"></script>
     <script type="text/jsx" src="js/renderMap.js"></script>
     <script type="text/jsx" src="js/react/postInfo.jsx"></script>
+    <script type="text/jsx" src="js/react/infoFeed.jsx"></script>
     <script type="text/javascript" src="js/addPostMap.js"></script>
 
     <script type="text/jsx">
@@ -19,8 +22,12 @@ include("header.php");
             document.getElementById('feed')
         );
         ReactDOM.render(
-            <Feed data={[]} />,
-            document.getElementById('myfeed')
+            <MyPosts data={[]} />,
+            document.getElementById('myposts')
+        );
+        ReactDOM.render(
+            <PostInfo data={[]} />,
+            document.getElementById('view-post')
         );
     </script>
 
@@ -149,7 +156,7 @@ include("header.php");
                                 <div id="collapse-my-posts" class="panel-colapse-map panel-collapse collapse">
                                     <div class="panel-body">
                                         <div data-toggle="modal" data-target="#new-post-modal" class="new-post button-new-post">Adicionar novo post</div>
-                                        <div id="myfeed"></div>
+                                        <div id="myposts"></div>
                                     </div>
                                 </div>
                             </div>
