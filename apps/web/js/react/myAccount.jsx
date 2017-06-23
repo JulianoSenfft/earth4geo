@@ -101,6 +101,10 @@ var MyAccount = React.createClass({
     },
 
     render: function() {
+        
+        var styles = {
+            backgroundImage: "url(" + this.state.data.description + ")",
+        };
         return (
             <div>
                 
@@ -111,7 +115,7 @@ var MyAccount = React.createClass({
                                 <div className="user-photo">
                                     
                                     {this.state.data.description ? (
-                                        <img src={this.state.data.description} className="current-user-photo" />
+                                        <span style={styles} className="big-user-photo"></span>
                                     ):( <img src="http://hnserver.com.br/~earth4geo/server/wp-content/uploads/f3.png" className="current-user-photo" /> )}
                                 </div>
                                 <input type="file" id="user-photo-file" className="custom-file-input" />

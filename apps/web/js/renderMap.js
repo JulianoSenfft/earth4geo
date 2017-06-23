@@ -20,12 +20,30 @@ function renderMap(data){
             var position = new google.maps.LatLng(data[i].meta_box.latitude, data[i].meta_box.longitude);
             bounds.extend(position);
             
+            var icone = "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-1.png";
+            
+            if(data[i].meta_box.tipo == "geoinfo"){
+                icone = "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-1.png";
+                if(data[i].meta_box.ajuda_localizacao == 1){
+                    icone = "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-question.png";
+                }
+            }
+            if(data[i].meta_box.tipo == "geojobs"){
+                icone = "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-laranja.png";
+                if(data[i].meta_box.ajuda_localizacao == 1){
+                    icone = "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-laranja-question.png";
+                }
+            }
+            if(data[i].meta_box.tipo == "geomarket"){
+                icone = "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-roxo.png"; 
+            }
+            
             var marker = new google.maps.Marker({
                 position: position,
                 map: map,
                 title: data[i].meta_box.titulo,
                 data: data[i],
-                icon: "http://hnserver.com.br/~earth4geo/server/wp-content/uploads/icone-50-1.png"
+                icon: icone
             });
             markers.push(marker);
             
@@ -33,6 +51,7 @@ function renderMap(data){
             // Allow each marker to have an info window    
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
+                    PubSub.publish('carrega-ver-mais', marker.data);
                     PubSub.publish('carrega-ver-mais', marker.data);
                 }
             })(marker, i));

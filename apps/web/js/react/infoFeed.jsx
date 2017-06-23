@@ -8,6 +8,7 @@ var InfoFeed = React.createClass({
     
     viewMore: function(data) {
         PubSub.publish('carrega-ver-mais', data);
+        PubSub.publish('carrega-ver-mais', data);
     },
     
     render: function(){

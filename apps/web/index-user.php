@@ -1,12 +1,21 @@
 <?php
 include("header.php");
 ?>
+
+    <script>
+        jQuery(document).ready(function(){
+            if(checkCookie() == 0){
+                window.location = "login.php"; 
+            }
+        });      
+    </script>
     <script type="text/jsx" src="js/react/comments.jsx"></script>
     <script type="text/jsx" src="js/react/feeds.jsx"></script>
     <script type="text/jsx" src="js/react/myPosts.jsx"></script>
     <script type="text/jsx" src="js/react/map.jsx"></script>
     <script type="text/jsx" src="js/react/renderedToolTip.jsx"></script>
     <script type="text/jsx" src="js/react/addPost.jsx"></script>
+    <script type="text/jsx" src="js/react/findFriends.jsx"></script>
     <script type="text/jsx" src="js/renderMap.js"></script>
     <script type="text/jsx" src="js/react/postInfo.jsx"></script>
     <script type="text/jsx" src="js/react/infoFeed.jsx"></script>
@@ -162,13 +171,15 @@ include("header.php");
                             </div>
                             <div class="panel panel-info my-friends">
                                 <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-my-friends">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Meus amigos</a>
-                                  </h4>
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-my-friends">
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i> Meus amigos</a>
+                                    </h4>
                                 </div>
                                 <div id="collapse-my-friends" class="panel-colapse-map panel-collapse collapse">
                                     <div class="panel-body">
+                                        <div data-toggle="modal" data-target="#find-friends-modal" class="find-friends button-find-friends">Search friends</div>
+                                        <div id="myfriends"></div>
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +190,7 @@ include("header.php");
             
             <div class="container">
                 <div id="add-post"></div>
+                <div id="find-friends"></div>
             </div>
             <div id="view-post"></div>
         </div>

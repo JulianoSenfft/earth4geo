@@ -35,7 +35,6 @@
         
         <!-- PUBSUB -->
         <script src="https://cdn.jsdelivr.net/pubsubjs/1.4.2/pubsub.min.js"></script>
-        <script src="http://macbook-pro-de-juliano.local/earth4geo/apps/web/js/markercluster/src/markerclusterer.js"></script>
         
         <?php
         $domain = $_SERVER['SERVER_NAME'];
@@ -55,6 +54,7 @@
         </script>
         
         <script src="<?php echo $requests; ?>/apps/web/js/react/navMenu.jsx" type="text/jsx"></script>
+        <script src="<?php echo $requests; ?>/apps/web/js/markercluster/src/markerclusterer.js"></script>
         
         <script>
         jQuery(document).ready(function(){

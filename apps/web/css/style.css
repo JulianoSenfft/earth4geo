@@ -1,9 +1,40 @@
+.small-user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: 100%;
+    float: left;
+    margin-right: 8px;
+}
+.medium-user-photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: 100%;
+    float: left;
+    margin-right: 8px;
+}
+.big-user-photo{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-size: 100%;
+    float: left;
+    margin-right: 8px;
+}
+
+
+.loader-button i {
+    font-size: 15px;
+    width: auto;
+}
+
 .loader i {
     font-size: 25px !important;
     text-align: center !important;
     width: 100% !important;
 }
-.loader {
+.loader, .loader-button {
     display: none;
 }
 
@@ -74,7 +105,7 @@ body {
     height: auto !important;
 }
 .navbar-brand img{
-    width: 150px;
+    width: 209px;
 }
 .navbar-nav > li > a {
     padding: 28px 15px !important;
@@ -147,14 +178,14 @@ footer{
 .panel-heading {
     padding: 7px 15px !important;
 }
-.button-new-post {
+.button-new-post, .button-find-friends {
     background-color: #1FB5FC;
     text-align: center;
     color: white;
     padding: 5px;
     margin-bottom: 15px;
 }
-.new-post{
+.new-post, .find-friends{
     cursor: pointer;
 }
 #postFormMap {
@@ -213,6 +244,7 @@ a:hover{
 
 .navbar-default .navbar-nav > li > a {
     color: #000 !important;
+    line-height: 40px;
 }
 .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
     color: #1FB5FC !important;

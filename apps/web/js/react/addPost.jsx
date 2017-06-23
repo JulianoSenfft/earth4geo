@@ -1,4 +1,3 @@
-
 var Addpost = React.createClass({
     
     getInitialState: function() {
@@ -8,8 +7,21 @@ var Addpost = React.createClass({
         };
     },
     
+    componentDidMount: function() {
+        PubSub.subscribe('adding-post', function(topico, data){
+            if(data == "init"){
+                jQuery(".adding-post").show();
+                jQuery('#button-add-post').attr("disabled", true);
+            }else{
+                jQuery(".adding-post").hide();
+            }
+        }.bind(this));
+        
+    },
+    
     uploadImage: function(imageData, postID){
         var auth = checkCookie("earth4geo_crypt")
+        
         $.ajax({
             url: request + '/server/wp-json/wp/v2/media/',
             method: 'POST',
@@ -36,6 +48,7 @@ var Addpost = React.createClass({
                     },
                     success: function(result) {
                         PubSub.publish('atualiza-lista-posts');
+                        PubSub.publish('adding-post', "end");
                     }.bind(this)
                 });
             }.bind(this)
@@ -81,6 +94,9 @@ var Addpost = React.createClass({
     
     addPost: function() {
         
+        
+        PubSub.publish('adding-post', "init");
+        
         var user_id = checkCookie()
         var auth = checkCookie("earth4geo_crypt")
         
@@ -110,6 +126,7 @@ var Addpost = React.createClass({
                     this.uploadImage(imageData, result.id);
                 }else{
                     PubSub.publish('atualiza-lista-posts');
+                    PubSub.publish('adding-post', "end");
                 }
             }.bind(this)
         });
@@ -160,7 +177,7 @@ var Addpost = React.createClass({
                             </div>
                             <div className="modal-footer">
                                 
-                                <button onClick={this.addPost} id="button-add-post" type="submit" className="btn btn-default align-left">Publish</button>
+                                <button onClick={this.addPost} id="button-add-post" type="submit" className="btn btn-default align-left">Publish <span className="loader-button adding-post"><i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i></span></button>
                                 
                                 <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
                                 

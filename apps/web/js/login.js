@@ -18,7 +18,10 @@ jQuery(document).ready(function(){
                 setCookie("earth4geo", data, 7);
                 setCookie("earth4geo_crypt", crypt, 7);
                 checkCookie();
-                mensagem("Login efetuado com sucesso", "success", "login-message")
+                mensagem("Login efetuado com sucesso, redirecionando", "success", "login-message")
+                window.setTimeout(function(){
+                    window.location.href = request + "/apps/web/index-user.php";
+                }, 500);
             },
             error: function(xhr, status, error) {
                 mensagem("Usuário ou senha inválidos", "danger", "login-message")
