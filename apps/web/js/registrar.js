@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
                 mensagem(response.message, "danger", "register-message")
             },
             success: function(result) {
-                mensagem("Registro efetuado com sucesso, por favor confirme seu e-mail clicando no link enviado para o seu e-mail.", "success", "register-message")
+                mensagem("Registro efetuado com sucesso, você está pronto para fazer o login.", "success", "register-message")
             }.bind(this)
         });
     }); 
