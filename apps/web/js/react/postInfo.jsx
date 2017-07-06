@@ -12,9 +12,11 @@ var PostInfo = React.createClass({
         
         PubSub.subscribe('carrega-ver-mais', function(topico, data){
             $("#view-post-modal").modal()
-            this.setState({data: data});
-            this.setState({comments: []});
-            this.setState({likes: []});
+            this.setState({
+                data: data,
+                comments: [],
+                likes: []
+            });
             this.getComments(data.id);
             this.getLikes(data.id);
         }.bind(this));
@@ -222,6 +224,13 @@ var PostInfo = React.createClass({
         
         var isPostAuthor = self.isPostAuthor(dados.author);
         
+        
+        if(dados.length != 0){
+            var styles = {
+                backgroundImage: "url(" + dados._embedded.author[0].description + ")",
+            };
+        }
+        
         return (
             <div>
                 {dados.length != 0 &&
@@ -233,7 +242,7 @@ var PostInfo = React.createClass({
                                 
                                 <div className='info-post-author'>
                                     <div className='author-photo photo-default-feed'>
-                                        <img className='photo' src={dados._embedded.author[0].description}></img>
+                                        <span style={styles} className="normal-user-photo"></span>
                                     </div>
                                     <div className='author-name'>
                                         {dados._embedded.author[0].name}
@@ -281,6 +290,9 @@ var PostInfo = React.createClass({
                                         <div className="comentarios">
                                             {this.state.comments.map(function(data, i) {
                                                 
+                                                var styles = {
+                                                    backgroundImage: "url(" + data._embedded.author[0].description + ")",
+                                                };
                                                 return (
                                                     <div>
                                                         {self.isCommentAuthor(data.author) ? ( 
@@ -289,8 +301,7 @@ var PostInfo = React.createClass({
                                                         <div className="comentario">
                                                             <div className='info-post-author'>
                                                                 <div className='author-photo photo-default-feed'>
-                                                                    <img className='photo' src=
-                                                                    {data._embedded.author[0].description}></img>
+                                                                    <span style={styles} className="normal-user-photo"></span>
                                                                 </div>
                                                                 <div className='author-name'>
                                                                     {data._embedded.author[0].name}

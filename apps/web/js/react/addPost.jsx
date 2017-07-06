@@ -20,6 +20,7 @@ var Addpost = React.createClass({
     },
     
     uploadImage: function(imageData, postID){
+        
         var auth = checkCookie("earth4geo_crypt")
         
         $.ajax({

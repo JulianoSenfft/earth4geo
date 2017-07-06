@@ -12,13 +12,19 @@ var InfoFeed = React.createClass({
     },
     
     render: function(){
+        
         var self = this;
         var data = this.props.data;
+        
+        var styles = {
+            backgroundImage: "url(" + data._embedded.author[0].description + ")",
+        };
+        
         return (
             <div className='single-post'>
                 <div className='info-post-author'>
                     <div className='author-photo photo-default-feed'>
-                        <img className='photo' src={data._embedded.author[0].description}></img>
+                        <span style={styles} className="normal-user-photo"></span>
                     </div>
                     <div className='author-name'>
                         {data._embedded.author[0].name} fez uma publicação
@@ -26,10 +32,10 @@ var InfoFeed = React.createClass({
                 </div>
 
                 <div className='info-post-title-feed'>
-                    <h4 key={'post-title-'+ data.id}> {data.meta_box.titulo} </h4>
+                    <h4 key={'post-title-'+ data.id}> {data.meta_box.titulo}</h4>
                 </div>
 
-                {data.meta_box.conteudo ? (   
+                {data.meta_box.conteudo ? ( 
                     <div className='info-post-content'>
                         <p className={'post-content-'+ data.id} key={'post-content-'+ data.id}>
                             {data.meta_box.conteudo}

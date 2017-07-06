@@ -9,6 +9,7 @@ include("header.php");
             }
         });      
     </script>
+    <script type="text/javascript" src="js/solicitacao.js"></script>
     <script type="text/jsx" src="js/react/comments.jsx"></script>
     <script type="text/jsx" src="js/react/feeds.jsx"></script>
     <script type="text/jsx" src="js/react/myPosts.jsx"></script>
@@ -19,6 +20,7 @@ include("header.php");
     <script type="text/jsx" src="js/renderMap.js"></script>
     <script type="text/jsx" src="js/react/postInfo.jsx"></script>
     <script type="text/jsx" src="js/react/infoFeed.jsx"></script>
+    <script type="text/jsx" src="js/react/myFriends.jsx"></script>
     <script type="text/javascript" src="js/addPostMap.js"></script>
 
     <script type="text/jsx">
@@ -38,11 +40,14 @@ include("header.php");
             <PostInfo data={[]} />,
             document.getElementById('view-post')
         );
+        ReactDOM.render(
+            <MyFriends data={[]} />,
+            document.getElementById('my-friends')
+        );
     </script>
 
     <body class="home has-full-map">
         <div id="main">
-            
             <div class="full-width">
                 <div class="full-col col-md-9">
                     <div id="map" class='full-height'></div>
@@ -178,8 +183,8 @@ include("header.php");
                                 </div>
                                 <div id="collapse-my-friends" class="panel-colapse-map panel-collapse collapse">
                                     <div class="panel-body">
-                                        <div data-toggle="modal" data-target="#find-friends-modal" class="find-friends button-find-friends">Search friends</div>
-                                        <div id="myfriends"></div>
+                                        <div data-toggle="modal" data-target="#find-friends-modal" class="find-friends button-find-friends">Search more friends</div>
+                                        <div id="my-friends"></div>
                                     </div>
                                 </div>
                             </div>

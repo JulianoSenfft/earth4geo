@@ -55,6 +55,7 @@
         
         <script src="<?php echo $requests; ?>/apps/web/js/react/navMenu.jsx" type="text/jsx"></script>
         <script src="<?php echo $requests; ?>/apps/web/js/markercluster/src/markerclusterer.js"></script>
+        <script src="<?php echo $requests; ?>/apps/web/js/notificacao.js"></script>
         
         <script>
         jQuery(document).ready(function(){

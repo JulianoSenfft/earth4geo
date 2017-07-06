@@ -118,14 +118,68 @@ function cac_geo_meta_boxes( $meta_boxes ) {
         'fields'     => array(
             //TEXT
             array(
-                'name' => 'Post ID',
-                'id'   => 'post_id',
+                'name' => 'Post Ref',
+                'id'   => 'post_ref',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Users Ref',
+                'id'   => 'user_ref',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'To User Ref',
+                'id'   => 'to_user_ref',
                 'type' => 'text',
             ),
             //TEXT
             array(
                 'name' => 'Tipo de notificação',
                 'id'   => 'tipo_notificacao',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Status',
+                'id'   => 'status',
+                'type' => 'text',
+            ),
+        ),
+    );
+    $meta_boxes[] = array(
+        'title'      => 'Dados da solicitacao',
+        'post_types' => 'solicitacao',
+        'fields'     => array(
+            //TEXT
+            array(
+                'name' => 'Post Ref',
+                'id'   => 'post_ref',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'User Ref',
+                'id'   => 'user_ref',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'To User Ref',
+                'id'   => 'to_user_ref',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Tipo de solicitacao',
+                'id'   => 'tipo_solicitacao',
+                'type' => 'text',
+            ),
+            //TEXT
+            array(
+                'name' => 'Status',
+                'id'   => 'status',
                 'type' => 'text',
             ),
         ),

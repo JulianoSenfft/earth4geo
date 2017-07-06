@@ -36,7 +36,6 @@ var MyAccount = React.createClass({
                     method: 'POST',
                     data:{
                         description: result.source_url,
-                        name: "Juliano Senfft"
                     },
                     beforeSend: function ( xhr ) {
                         xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );

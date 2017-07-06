@@ -15,6 +15,7 @@ require_once dirname(__FILE__) . "/cac_geo_meta_boxe.php";
 require_once dirname(__FILE__) . "/cac_geo_functions.php";
 require_once dirname(__FILE__) . "/cac_geo_post_type.php";
 require_once dirname(__FILE__) . "/cac_geo_role.php";
+require_once dirname(__FILE__) . "/cac_geo_userdata.php";
 
 
 add_filter( 'rest_prepare_user', function( $response, $user, $request ) {
@@ -64,9 +65,4 @@ function mb_rest_add_filters_param( $args, $request ) {
 	}
 	return $args;
 }
-
-// Aqui você pode carregar variáveis globais, que podem ser usados em qualquer arquivo ou plugin
-
-global $geo;
-//$earthgeo['plugin_url'] = plugin_dir_url('cac_creche') . "cac_creche";
 ?>
