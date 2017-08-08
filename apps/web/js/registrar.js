@@ -22,7 +22,19 @@ jQuery(document).ready(function(){
                 mensagem(response.message, "danger", "register-message")
             },
             success: function(result) {
-                mensagem("Registro efetuado com sucesso, você está pronto para fazer o login.", "success", "register-message")
+                
+                var string = email + ":" + password;
+                var crypt = btoa(string);
+                
+                setCookie("earth4geo", result.id, 7);
+                setCookie("earth4geo_crypt", crypt, 7);
+                checkCookie();
+                
+                mensagem("Registro efetuado com sucesso. Redirecionando...", "success", "login-message")
+                window.setTimeout(function(){
+                    window.location.href = request + "/apps/web/index-user.php";
+                }, 500);
+                
             }.bind(this)
         });
     }); 

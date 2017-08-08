@@ -19,43 +19,6 @@ var Addpost = React.createClass({
         
     },
     
-    uploadImage: function(imageData, postID){
-        
-        var auth = checkCookie("earth4geo_crypt")
-        
-        $.ajax({
-            url: request + '/server/wp-json/wp/v2/media/',
-            method: 'POST',
-            data: imageData,
-            contentType: false,
-            processData: false,
-            beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
-            },
-            error: function(error) {
-                console.log(error)
-            },
-            success: function(result) {
-                $.ajax({
-                    url: request + '/server/wp-json/wp/v2/publicacao/' + postID,
-                    method: 'POST',
-                    data:{
-                        meta_box: {
-                            imagem: result.source_url
-                        },
-                    },
-                    beforeSend: function ( xhr ) {
-                        xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
-                    },
-                    success: function(result) {
-                        PubSub.publish('atualiza-lista-posts');
-                        PubSub.publish('adding-post', "end");
-                    }.bind(this)
-                });
-            }.bind(this)
-        }); 
-    },
-    
     getPostInfos: function() {
         
         var metabox = {};
@@ -93,6 +56,43 @@ var Addpost = React.createClass({
         
     },
     
+    uploadImage: function(imageData, postID){
+        
+        var auth = checkCookie("earth4geo_crypt")
+        
+        $.ajax({
+            url: request + '/server/wp-json/wp/v2/media/',
+            method: 'POST',
+            data: imageData,
+            contentType: false,
+            processData: false,
+            beforeSend: function ( xhr ) {
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
+            },
+            error: function(error) {
+                console.log(error)
+            },
+            success: function(result) {
+                $.ajax({
+                    url: request + '/server/wp-json/wp/v2/publicacao/' + postID,
+                    method: 'POST',
+                    data:{
+                        meta_box: {
+                            imagem: result.source_url
+                        },
+                    },
+                    beforeSend: function ( xhr ) {
+                        xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
+                    },
+                    success: function(result) {
+                        PubSub.publish('atualiza-lista-posts');
+                        PubSub.publish('adding-post', "end");
+                    }.bind(this)
+                });
+            }.bind(this)
+        }); 
+    },
+    
     addPost: function() {
         
         
@@ -103,7 +103,7 @@ var Addpost = React.createClass({
         
         var imageData = new FormData();
         imageData.append( "file", $('input#imagem')[0].files[0]);
-        imageData.append( "post", user_id);
+        //imageData.append( "post", user_id);
         
         var metabox = this.getPostInfos();
         

@@ -3,13 +3,10 @@ include("header.php");
 ?>
 
     <script>
-        jQuery(document).ready(function(){
-            if(checkCookie() == 0){
-                window.location = "login.php"; 
-            }
-        });      
+        if(checkCookie() == 0){
+            window.location = "login.php"; 
+        }  
     </script>
-    <script type="text/javascript" src="js/solicitacao.js"></script>
     <script type="text/jsx" src="js/react/comments.jsx"></script>
     <script type="text/jsx" src="js/react/feeds.jsx"></script>
     <script type="text/jsx" src="js/react/myPosts.jsx"></script>

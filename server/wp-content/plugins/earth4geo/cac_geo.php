@@ -16,6 +16,7 @@ require_once dirname(__FILE__) . "/cac_geo_functions.php";
 require_once dirname(__FILE__) . "/cac_geo_post_type.php";
 require_once dirname(__FILE__) . "/cac_geo_role.php";
 require_once dirname(__FILE__) . "/cac_geo_userdata.php";
+require_once dirname(__FILE__) . "/cac_custom_end_points.php";
 
 
 add_filter( 'rest_prepare_user', function( $response, $user, $request ) {

@@ -12,12 +12,12 @@ include("header.php");
 
     <body>
         <div id="main">
-            <h1>Login</h1>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6 align-center box-form">
+                        <h1>Login</h1>
                         <div class="main-login main-center">
-                            <form class="form-horizontal" method="post" action="#">
+                            <form class="form-horizontal col-md-12" method="post" action="#">
                                 <div class="form-group">
                                     <label for="email" class="cols-sm-2 control-label">Seu E-mail</label>
                                     <div class="cols-sm-10">
@@ -39,13 +39,13 @@ include("header.php");
                                 </div>
 
                                 <div class="form-group">
-                                    <button id="submeter" type="button" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+                                    <div class="login-register">
+                                        <a href="registrar.php">Não possui uma conta? Registre-se</a>
+                                     </div>
+                                    <button id="submeter" type="button" class="btn btn-primary btn-block login-button">Login</button>
                                 </div>
                                 <div class="form-group">
                                     <div class="login-message"></div>
-                                    <div class="login-register">
-                                        <a href="registrar.php">Não possui uma conta? Registrar-se</a>
-                                     </div>
                                 </div>
                             </form>
                         </div>

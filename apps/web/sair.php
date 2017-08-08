@@ -5,8 +5,9 @@ include("header.php");
 
     <body>
         <div id="main">
-            <h1>Sair</h1>
-            <div class="disconnect-message"></div>
+            <div class="container">
+                <div class="disconnect-message"></div>
+            </div>
         </div>
     </body>
 

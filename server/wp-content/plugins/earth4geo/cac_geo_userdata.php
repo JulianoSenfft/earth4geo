@@ -40,14 +40,26 @@ function rest_get_user_field( $user, $field_name, $request ) {
 add_filter( 'rest_user_query' , 'custom_rest_user_query', 10, 2 );
 function custom_rest_user_query( $prepared_args, $request ) {
     if($request['filter']['search']){
-        $prepared_args['search'] = "*" . $request['filter']['search'] . "*";   
+        /*$prepared_args['search'] = "*" . $request['filter']['search'] . "*";   
         $prepared_args['search_columns'] = array(
             'user_login',
             'user_nicename',
             'user_email',
             'user_url',
-        );
+        );*/
     }
+    
+	$filters = $request['filter'];
+    
+    if($filters){
+        $i = 0;
+        foreach($filters as $key => $value){
+            $prepared_args[$key] = $value;
+            $i++;
+        }
+    }
+
+    
     return $prepared_args;
 }
 

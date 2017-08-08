@@ -13,20 +13,21 @@ var Navmenu = React.createClass({
     getUserInfo: function(){
         var user_id = checkCookie();
         var auth = checkCookie("earth4geo_crypt")
-        
-        $.ajax({
-            url: request + '/server/wp-json/wp/v2/users/' + user_id,
-            method: 'GET',
-            beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
-            },
-            error: function(error) {
-                console.log(error)
-            },
-            success: function(result) {
-                this.setState({userinfo: result});
-            }.bind(this)
-        });
+        if(user_id > 0){
+            $.ajax({
+                url: request + '/server/wp-json/wp/v2/users/' + user_id,
+                method: 'GET',
+                beforeSend: function ( xhr ) {
+                    xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
+                },
+                error: function(error) {
+                    console.log(error)
+                },
+                success: function(result) {
+                    this.setState({userinfo: result});
+                }.bind(this)
+            });
+        }
     },
 
     render: function() {

@@ -6,13 +6,12 @@ include("header.php");
 
     <body>
         <div id="main">
-            <h1>Registrar</h1>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        
+                    <div class="col-md-6 align-center box-form">
+                        <h1>Registrar</h1>
                         <div class="main-login main-center">
-                            <form class="form-horizontal" method="post" action="#">
+                            <form class="form-horizontal col-md-12" method="post" action="#">
 
                                 <div class="form-group">
                                     <label for="name" class="cols-sm-2 control-label">Seu nome</label>
@@ -54,14 +53,20 @@ include("header.php");
                                     </div>
                                 </div>
 
-                                <div class="form-group ">
-                                    <button id="submeter" type="button" class="btn btn-primary btn-lg btn-block login-button">Registrar</button>
-                                </div>
                                 <div class="form-group">
-                                    <div class="register-message"></div>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="termos-de-uso"> Li e aceito os <a href="termos-de-uso.php">Termos de Uso</a> e <a href="privacidade.php"> Politica de Privacidade</a>.
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="login-register">
                                         <a href="login.php">Já possui uma conta? Fazer login</a>
                                      </div>
+                                    <button id="submeter" type="button" class="btn btn-primary btn-block register-button">Registrar</button>
+                                </div>
+                                <div class="form-group">
+                                    <div class="register-message"></div>
                                 </div>
                             </form>
                         </div>

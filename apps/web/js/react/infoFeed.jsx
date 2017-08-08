@@ -11,6 +11,39 @@ var InfoFeed = React.createClass({
         PubSub.publish('carrega-ver-mais', data);
     },
     
+    isPostAuthor: function(comment_author_id){
+        var user_id = checkCookie()
+        if(comment_author_id == user_id){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    
+    removerPost: function(id) {
+        var user_id = checkCookie()
+        var auth = checkCookie("earth4geo_crypt")
+        
+        console.log("#exclude-" + id)
+        
+        jQuery("#exclude-" + id).html("<i class='fa fa-circle-o-notch fa-spin'></i>")
+        
+        $.ajax({
+            url: request + '/server/wp-json/wp/v2/publicacao/' + id,
+            method: 'DELETE',
+            beforeSend: function ( xhr ) {
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + auth );
+            },
+            error: function(error) {
+                console.log(error.responseJSON.message)
+            },
+            success: function(result) {
+                jQuery("#exclude-" + id).html("")
+                PubSub.publish('atualiza-lista-posts');
+            }.bind(this)
+        });
+    },
+    
     render: function(){
         
         var self = this;
@@ -29,6 +62,9 @@ var InfoFeed = React.createClass({
                     <div className='author-name'>
                         {data._embedded.author[0].name} fez uma publicação
                     </div>
+                    {self.isPostAuthor(data._embedded.author[0].id) ? ( 
+                        <span className="post-exclude" id={'exclude-' + data.id} onClick={function(){self.removerPost(data.id)}}><i className="fa fa-times"></i></span>
+                    ):( <span></span> )}
                 </div>
 
                 <div className='info-post-title-feed'>
